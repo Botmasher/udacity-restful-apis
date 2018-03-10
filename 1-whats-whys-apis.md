@@ -114,13 +114,64 @@
 	- as easily the most popular for new APIs
 
 ## 11. Quiz: Developer Discussions
+- Question: Which tech does this describe?
+	- "We used to use this protocol for our web API" but are changing over to REST
+	- "it wasn't very popular" for web/mobile devs
+	- "though it worked on multiple application-level protocols"
+	- Answer: SOAP
 
 ## 12. Quiz: Developer Discussions
+- Question: Which tech does this desribe?
+	- We're using this "instead of XML for transmitting messages"
+	- XML was fine but this is easy to use with Python and JS
+	- Answer: JSON
 
 ## 13. Quiz: Developer Discussions
+- Question: Which tech does this describe?
+	- It's the "foundation of data communication" for the web
+	- there are "countless other application-layer protocols"
+	- there's FTP and POP
+	- but RESTful APIs will need to use this
+	- Answer: HTTP
 
 ## 14. REST Constraints
+- REST as set of guidelines, not a protocol
+- clarification constraints applied to HTTP
+	- for comm
+	- for resource mgmt
+- what do the constraints mean for us?
+	1. client-server separation
+		- client requests resource
+		- server responds with requested resource
+		- any machine can be client or server
+		- but this separates them out to the requester of info or server of info
+	2. statelessness
+		- stateful architecture remembers client activity between requests
+		- RESTful architecture doesn't remember your activity throughout your session
+		- requests are independent of each other
+		- server doesn't remember client
+		- server treats each request like it's the first time
+		- tokens (lesson 4) will help give user sense of remembering state
+	3. cacheability
+		- responses from server are labeled cacheable/non-cacheable
+		- allows ability to use cache if info hasn't changed since last request
+	4. uniform interface
+		- all clients and servers access data the same way regardless of OS or machine
+	5. layered system
+		- client can access endpoint relying on other endpoints
+		- no need to understand underlying implementations
+		- if a server itself accesses a remote API, client shouldn't have to account for that
+		- no need to understand complexities required to generate response
+	6. code on demand (optional)
+		- opens possibility for code such as JS
+		- server can send code for execution
+- Take the time to read Fielding's [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
 
 ## 15. Quiz: Why Stateless?
+- Question: What do you think are the problems with statefulness? Why aren't RESTful servers allowed to remember state?
+- Consider some reasons: https://ruben.verborgh.org/blog/2012/08/24/rest-wheres-my-state/
 
 ## 16. Lesson 1 Wrap Up
+- we discussed important API features
+- we decided to implement a RESTful API with JSON
+- next time we'll go hands on
