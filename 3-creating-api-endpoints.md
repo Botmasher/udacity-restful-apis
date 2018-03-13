@@ -1,6 +1,6 @@
 # Creating your own API Endpoints
 
-## Lesson 3 Intro
+## 1. Lesson 3 Intro
 - we'll use Flask to build endpoints + backend + db
 - check out the Flask documentation if you are unfamiliar
 - (used in the Udacity FSF course, so try that if you want more exposure)
