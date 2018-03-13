@@ -52,13 +52,14 @@
 	3. finds nearby restaurant with that meal type
 	4. stores restaurant in a db
 	5. returns restaurant JSON object to user
-- endpoint `/restaurants` handle returning all restaurants in db
-	- name, id, address and img
-- endpoint `/restaurants/<int:id>` returns same info for just one restaurant
-	- an update to this endpoint should update any of that info
-	- a delete to this endpoint should remove that info from the db
-- make sure to update `findARestaurant` with your client ID and secret
-- use Python tester to check your endpoints
+- exercise process including changes you will need to make:
+	1. `views.py` endpoint `/restaurants` handle returning all restaurants in db
+		- name, id, address and img
+	2. `views.py` endpoint `/restaurants/<int:id>` returns same info for just one restaurant
+		- an update to this endpoint should update any of that info
+		- a delete to this endpoint should remove that info from the db
+	3. `findARestaurant.py` needs updated with your client ID and secret
+	4. use Python tester to check your endpoints
 
 ## 7. Lesson 3 Wrap Up
 - next time you'll add security to your endpoints

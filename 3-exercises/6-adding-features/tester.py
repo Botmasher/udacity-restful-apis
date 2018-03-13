@@ -2,13 +2,13 @@ import httplib2
 import sys
 import json
 
-import sys
-import codecs
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-sys.stderr = codecs.getwriter('utf8')(sys.stderr)
+#import sys
+#import codecs
+#sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+#sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
 print("Running Endpoint Tester....\n")
-address = raw_input("Please enter the address of the server you want to access, \n If left blank the connection will be set to 'http://localhost:5000':   ")
+address = input("Please enter the address of the server you want to access, \n If left blank the connection will be set to 'http://localhost:5000':   ")
 if address == '':
 	address = 'http://localhost:5000'
 #TEST ONE -- CREATE NEW RESTAURANTS
@@ -33,7 +33,7 @@ try:
 	resp, result = h.request(url,'POST')
 	if resp['status'] != '200':
 		raise Exception('Received an unsuccessful status code of %s' % resp['status'])
-	print(json.loads(result).iteritems())
+	print(json.loads(result))
 
 	url = address + '/restaurants?location=Shanghai+China&mealType=Sandwiches'
 	h = httplib2.Http()

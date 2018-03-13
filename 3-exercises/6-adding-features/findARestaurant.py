@@ -2,10 +2,10 @@
 import json
 import httplib2
 
-import sys
-import codecs
-sys.stdout = codecs.getwriter('utf8')(sys.stdout)
-sys.stderr = codecs.getwriter('utf8')(sys.stderr)
+#import sys
+#import codecs
+#sys.stdout = codecs.getwriter('utf8')(sys.stdout)
+#sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
 foursquare_client_id = 'SMQNYZFVCIOYIRAIXND2D5SYBLQUOPDB4HZTV13TT22AGACD'
 foursquare_client_secret = 'IHBS4VBHYWJL53NLIY2HSVI5A1144GJ3MDTYYY1KLKTMC4BV'
@@ -59,8 +59,8 @@ def findARestaurant(mealType, location):
         #print("Image: %s \n " % restaurantInfo['image'])
         return restaurantInfo
     else:
-        #print("No Restaurants Found for %s" % location)
-        return "No Restaurants Found"
+        #return "No Restaurants Found for %s" % location
+        return None
     
 if __name__ == '__main__':
     findARestaurant("Pizza", "Tokyo, Japan")

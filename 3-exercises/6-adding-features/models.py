@@ -19,10 +19,9 @@ class Restaurant(Base):
       'restaurant_name': self.restaurant_name,
       'restaurant_address': self.restaurant_address,
       'restaurant_image' : self.restaurant_image,
-      'id' : self.id
-      
-      }
+      'id' : self.id  
+    }
 
-engine = create_engine('sqlite:///restaruants.db')
+engine = create_engine('sqlite:///restaurants.db')
 
 Base.metadata.create_all(engine)
