@@ -105,4 +105,46 @@
 - Foursquare gives search results tailored to user, places they visit, other users' advice, ...
 - focuses on places to go near user
 - use search feature to find restaurant using lat/long
-- Question: 
+- Question: using Geocoding and Foursquare API, what's a restaurant in a city for each meal type?
+	- pizza in 37.392891, -122.076044
+	- sushi in 25.773822, -80.237947
+	- donuts in 38.897478, -77.000147
+	- salad in 40.768349, -73.96575
+
+## 9. Requesting from Python Code
+- create requests and responses in Python for our app
+- start with a simple py app that does geocoding called `geocode.py`
+	1. import HTTP client library and library for serializing py objs in JSON: `httplib2` and `json`
+	2. define `getGeocodeLocation(inputString)`
+	3. create variable to store API key
+	4. replace spaces in `inputString` with `"+"`
+	5. build the URL to the API
+	6. create an instance of `httplib2.Http()`
+	7. use the instance to create a GET request and assign the returned array to `response, content`
+	8. call `json.loads()` on the `content`
+	9. return the formatted result
+- now run Python from the terminal, import the function from your file and test it with a location!
+- great! but how to parse through all the info in the response?
+
+## 10. Parsing Your Response
+- there seems to be NW, NE, SE, SW bounds for the map but then a central location for whole city
+- storing the results in `city`, can access `city.keys()` -> `[u'status', u'results']`
+- Question: dig into the `results` accounting for lists vs dicts, how do you get a city's longitude?
+	- Answer: `your_data_var_name['results'][0]['geometry']['location']['lng']`
+- now modify the geocoding function so it just returns longitude and latitude in a tuple
+
+## 11. Quiz: Make Your Own API Mashup
+- challenge to create own mashup using Google Maps Geocoding and Foursquare API data
+- write `findARestaurant`
+	- take a `mealType` and `location`
+	1. geocode the location
+	2. search for restaurants
+	3. parse response and return one restaurant
+	- returned value should be a dictionary with name, address and img URL
+	- recommended to use the `browse` parameter when sending off Foursquare call
+- intended to be tough!
+
+## 12. Lesson 2 Wrap Up
+- take time to explore other APIs like Wikipedia and StackExchange and whatnot
+- read and study documentation
+- next time create your own!
