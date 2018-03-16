@@ -155,5 +155,23 @@
 	4. if exchange successful, I create a token to send back to client
 		- now client can authenticate with my app using that token
 - register app with Google to get a client ID
-...
+- refactor User model in code to take advantage of OAuth
+	- there's profile info you can get from the access token
+	- name, email, profile pic easily obtainable through OAuth 2.0
+	- can look up users based on a unique email, so include that in the model
+- add an endpoint for `/oauth/<provider>` to respond to post req
+	0. run flow for provider `'google'`
+	1. in that `if` branch store the `auth_code = request.json.get('auth_code')`
+	2. send it off to Google in exchange for a token
+		- see example code for section 10
+	3. once have access token, send it off to Google and store the answer data
+		- look up user based on email address
+		- if user does not exist, make a new User and add and commit it
+	4. make a token like `token = user.generate_auth_token(600)`
+	5. send back jsonified token to client to access protected endpoints
+	6. for now just display the one-time auth code
+		- since we're not building a client-side app in this course
+		- if we do want to build a client-side app
+		- instead `@app.route(/clientOAuth)` just runs a function that `render_template('clientOAuth.html')`
 
+## 11. 
