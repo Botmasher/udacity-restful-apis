@@ -174,4 +174,75 @@
 		- if we do want to build a client-side app
 		- instead `@app.route(/clientOAuth)` just runs a function that `render_template('clientOAuth.html')`
 
-## 11. 
+## 11. Quiz: Pale Kale Salads & Smoothies
+- another small business wants users to access their API using existing Google account
+1. make an endpoint at `/oauth/<provider` that exchanges Google's one-time auth code for an access token
+2. use the access token to lookup user's email or create a new user
+3. create a new token and return it to client
+4. check your code with the Python test
+- Starter code: https://github.com/udacity/APIs/tree/master/Lesson_4/11_Pale%20Kale%20Ocean%20Eats/starter_code
+	- as before, update `print` and `input` statemenets for Python 3
+	- replace the `client_id` in the HTML file with your own
+	- some imports may be outdated (they were for me)
+	- (since starter code is missing for `views.py` and `models.py`, carefully examine solution code)
+	- currently the only test is to obtain a token, which works after I adjust the code
+
+## 12. Rate Limiting
+- tokens + OAuth let us control authentication and authorization for the API endpoints
+- what about a user who accesses the endpoints too much?
+	- other users may experience performance drops
+	- or our API may become unaccessible to some users
+- what if our API isn't free and users should pay?
+- **rate limiting** controls volume of requests from a user over a time period
+- in the next video, we'll use advanced Python to do rate limiting in Flask
+
+## 13. Rate Limiting Exercise
+- we'll use IP address to identify unique clients
+	- so also works for logged out users
+1. start a `views.py` file with a route `/rate-limited`
+2. use Redis, an in-memory data structure
+	- can be used as cache, message broker, database
+	- install Redis (already done in the course vagrant machine)
+3. run `redis-server` to start up a Redis instance
+4. make a `RateLimit` class that takes `object`
+	- set an `expiration_window`
+	- create an `__init__` method taking in `key_prefix`, `limit`, `per` and `send_x_headers`
+	- the key string will keep track of rate limits for each request
+	- `limit` and `per` define how many requests in a time period
+	- `send_x_headers` lets send back the limit in the response header to client
+	- use `redis.pipeline()` to avoid implementing a key without also setting key expiration
+		- this is in case an exception is raised between those lines
+	- create two lambdas to check time remaining and check if over rate limit
+5. define `get_view_rate_limit` to retrieve rate limit from `g` object in Flask
+6. define `on_over_limit` to return a message when client hits rate limit
+	- send `429` error meaning "too many requests"
+7. create a `ratelimit` function around a `ratelimit` decorator
+	- key is constructed
+	- instantiate `RateLimit`
+	- store `_over_limit` on `g` and check
+	- call `over_limit` on that instance if it's over
+	- (handle nested function returns)
+8. in each response to limited endpoint, append limit header and limit info
+	- can be turned off if `send_x_headers` is `False`
+9. now add `@ratelimit` to routes
+10. test it out!
+
+## 14. Quiz: Bargain Mart
+- this business wants to let customers view the supermarket inventory
+- but querying the db can be expensive
+- `hungryclient.py` is a perfect example
+- so add rate limit of 60 requests/minute
+	- as decorator to the inventory endpoints
+	- make sure the greedy client is rate limited
+- starter code: https://github.com/udacity/APIs/tree/master/Lesson_4/13_BargainMart/Starter%20Code
+1. open two terminals
+2. log both into the Vagrant VM
+3. run `redis-server &`
+4. then run `views.py`
+5. in the second terminal, run the hungry client to test
+- (the above instructions are to make sure Redis, the Flask app and the greedy code run at the same time)
+
+## 15. Lesson 4 Wrap Up
+- that's it for the lesson on API security
+- make sure to read more about secure API endpoints
+- next up: the final lesson, with API dev best practices before starting the final project!
